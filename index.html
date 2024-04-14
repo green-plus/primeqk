@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>カードの移動</title>
+<style>
+  .container {
+    display: flex;
+    justify-content: flex-start; /* 左に詰めて表示 */
+    gap: 10px;
+    min-height: 65px; /* 最小の高さを設定してスペースを確保 */
+    align-items: center; /* 中央揃え */
+  }
+  .card {
+    width: 40px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    cursor: pointer;
+  }
+  #upperRow {
+    background-color: #90ee90; /* 薄い緑色 */
+    margin: 10px;
+  }
+  #lowerRow {
+    background-color: #f4a460; /* 薄い茶色 */
+    margin: 10px;
+  }
+</style>
+</head>
+<body>
+<h2>素数練習くん</h2>
+<div id="upperRow" class="container">
+  <!-- 上段のカード -->
+  <!-- <div class="card">1</div> -->
+
+</div>
+
+<div id="lowerRow" class="container">
+  <!-- 下段のカード -->
+  <!-- <div class="card">A</div> -->
+</div>
+<button id="drawCard">カードをドロー</button>
+<button id="playHand">Play Hand</button>
+<button id="resetDeck">山札をリセットして配り直す</button>
+<button id="dealKTQJ">KXQJ入り</button>
+
+
+<div id="history">プレイ履歴:</div>
+
+<script src="sosu.js"></script>
+
+</body>
+</html>

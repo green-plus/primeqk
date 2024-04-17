@@ -219,8 +219,27 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  function resetAndDeal24() {
+    // 山札をリセット
+    deck = shuffle(createDeck());
+
+    // カードを全て削除
+    while (lowerRow.firstChild) {
+      lowerRow.removeChild(lowerRow.firstChild);
+    }
+    while (upperRow.firstChild) {
+      upperRow.removeChild(upperRow.firstChild);
+    }
+
+    // 新しい山札から11枚を配る
+    for (let i = 0; i < 24; i++) {
+      drawCard();
+    }
+  }
+
   // リセットボタンにイベントリスナーを設定
   document.getElementById('resetDeck').addEventListener('click', resetAndDeal);
+  document.getElementById('resetDeck24').addEventListener('click', resetAndDeal24);
 
 
   // ボタンにイベントリスナーを追加

@@ -126,7 +126,57 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  function toCard(deck) {
+    return deck.map(number => {
+        if (number <= 52) {
+            return Math.floor((number - 1) / 4) + 1;
+        } else {
+            return 'X';
+        }
+    });
+  }
+
+  function dealNineFaceCards() {
+    // 1~54までの数字を生成する
+    const numbers = Array.from({ length: 54 }, (_, i) => i + 1);
+
+    // 1~36までをシャッフルし15個をtmpdeckに追加する
+    const firstPart = numbers.slice(0, 36);
+    shuffle(firstPart);
+    const tmpdeck = firstPart.slice(0, 15);
+
+    // 37~54までをシャッフルし9個をtmpdeckの後ろに追加する
+    const secondPart = numbers.slice(36);
+    shuffle(secondPart);
+    tmpdeck.push(...secondPart.slice(0, 9));
+
+    // 上の2つの手順で選ばれなかった数を全て選び、シャッフルしてtmpdeckの後ろに追加する
+    const remainingNumbers = [
+        ...firstPart.slice(15),
+        ...secondPart.slice(9)
+    ];
+    shuffle(remainingNumbers);
+    tmpdeck.push(...remainingNumbers);
+
+    // deckという配列をtmpdeckで置き換える
+    deck = toCard(tmpdeck);
+
+    // カードを全て削除
+    while (lowerRow.firstChild) {
+      lowerRow.removeChild(lowerRow.firstChild);
+    }
+    while (upperRow.firstChild) {
+      upperRow.removeChild(upperRow.firstChild);
+    }
+
+    // 新しい山札から24枚を配る
+    for (let i = 0; i < 24; i++) {
+      drawCard();
+    }
+}
+
   document.getElementById('dealKXQJ').addEventListener('click', dealKXQJ);
+  document.getElementById('D9FC').addEventListener('click', dealNineFaceCards);
 
   function selectRandomCards(cards, count) {
     let selected = [];
